@@ -94,8 +94,28 @@ function removeTask(e) {
       e.target.parentElement.parentElement.remove();
 
       // Remove from LS
+      removeTaskFromLocalStorage(e.target.parentElement.parentElement);
     }
   }
+}
+
+// Remove from LS
+function removeTaskFromLocalStorage(taskItem) {
+  let tasks;
+  if (localStorage.getItem("tasks") === null) {
+    tasks = [];
+  } else {
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+  }
+
+  tasks.forEach((task, index) => {
+    if (taskItem.textContent === task) {
+      tasks.splice(index, 1);
+    }
+  });
+  console.log(tasks);
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 // Clear Tasks
