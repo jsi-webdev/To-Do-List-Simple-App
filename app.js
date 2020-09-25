@@ -1,6 +1,7 @@
 const form = document.querySelector("#task-form");
 const taskInput = document.querySelector("#task");
 const taskList = document.querySelector(".collection");
+const clearBtn = document.querySelector(".clear-btn");
 
 // Load all event listeners
 loadEventListeners();
@@ -11,6 +12,8 @@ function loadEventListeners() {
   form.addEventListener("submit", addTask);
   // Remove task event
   taskList.addEventListener("click", removeTask);
+  // Clear task event
+  clearBtn.addEventListener("click", clearTasks);
 }
 
 // Add Task
@@ -35,6 +38,8 @@ function addTask(e) {
   link.innerHTML = '<i class="fa fa-remove"></i>';
   // Append the link to li
   li.appendChild(link);
+  // Store in LS
+
   // Append li to ul
   taskList.appendChild(li);
   // Clear input
@@ -52,4 +57,15 @@ function removeTask(e) {
       // Remove from LS
     }
   }
+}
+
+// Clear Tasks
+function clearTasks() {
+  // taskList.innerHTML = "";
+
+  while (taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild);
+  }
+
+  // Clear from LS
 }
